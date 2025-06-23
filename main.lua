@@ -23,7 +23,7 @@ function lilka.update(delta)
         if cState.a.just_released and money>=5 then bet=bet+5 money=money-5
         elseif cState.b.just_released and money>=10 then bet=bet+10 money=money-10
         elseif cState.c.just_released and money>=50 then bet=bet+50 money=money-50
-        elseif cState.d.just_released and money>=100 then bet=bet=100 money=money-100 end
+        elseif cState.d.just_released and money>=100 then bet=bet+100 money=money-100 end
     elseif state=="turnP1" then
 
     elseif state=="turnP2" then
