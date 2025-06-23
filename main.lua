@@ -1,4 +1,4 @@
-function lilka::update()
+function lilka.update(delta)
 
     if controller.get_state().a.just_pressed then
 
@@ -11,7 +11,7 @@ function lilka::update()
 end
 
 
-function lilka::draw()
+function lilka.draw()
 
     -- Заповнюємо екран чорним кольором:
 
