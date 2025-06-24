@@ -22,7 +22,7 @@ end
 
 function gameStart()
   game={{},{}}
-  return {{randomCard(),randomCard()},{randomCard(),randomCard()}}
+  game={{randomCard(),randomCard()},{randomCard(),randomCard()}}
 end 
 
 function lilka.update(delta)
@@ -30,7 +30,7 @@ function lilka.update(delta)
     if cState.select.just_pressed then util.exit() end
     if state=="menu" then
         if cState.start.just_released then 
-          game=gameStart()
+          gameStart()
           bet=0
           state="pickBet"
         end
