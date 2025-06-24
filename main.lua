@@ -59,7 +59,11 @@ function lilka.update(delta)
                (calcPlayer(game[2])[1]>21 or 
                calcPlayer(game[1])[1]>
                calcPlayer(game[2])[1]) then
-                money=money+bet*2 end
+                money=money+bet*2
+            elseif calcPlayer(game[1])[1]<=21 and
+                   calcPlayer(game[1])[1]==
+                   calcPlayer(game[2])[1] then
+                money=money+bet end
             util.sleep(3)
             gameStart() 
             bet=0 
