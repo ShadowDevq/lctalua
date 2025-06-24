@@ -47,8 +47,8 @@ function lilka.update(delta)
         elseif cState.c.just_pressed then state="turnP2" end
         util.sleep(2)
     elseif state=="turnP2" then
-        if calcPlayer(game[2])>17 then table.insert(game[2],randomCard())
-        else state="turnP1" end
+        if calcPlayer(game[2])[1]>17 then table.insert(game[2],randomCard())
+        else util.sleep(3) game=gameStart() bet=0 state="pickBet" end
         util.sleep(2)
 end end
 
@@ -66,6 +66,6 @@ function lilka.draw()
         renderCentered("Money: "..tostring(money),display.width/2,display.height/2-fontSize[2]*2)
         renderCentered("Bet: "..tostring(bet),display.width/2,display.height/2+fontSize[2]*2)
     elseif state=="turnP1" or state=="turnP2" then
-        renderCentered(tostring(calcPlayer(game[1])),display.width/2,display.height/2+fontSize[2]/2)
+       renderCentered(calcPlayer(game[2])[2],display.width/2,display.height/2-fontSize[2]*2) renderCentered(calcPlayer(game[1])[2],display.width/2,display.height/2+fontSize[2]*2)
     end
 end
