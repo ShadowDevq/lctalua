@@ -1,3 +1,6 @@
+local game,state,bet,money={},"menu",0,10000
+display.set_font("10x20")
+local fontSize={10,20}
 local cValue,cType={1,2,3,4,5,6,7,8,9,10,10,10,10,-1},{"C","H","S","D"}
 function randomCard()
     local r = {cValue[math.random(1,14)],cType[math.random(1,4)]}
@@ -10,9 +13,6 @@ end end
 function gameStart()
   return {{randomCard(),randomCard()},{randomCard(),randomCard()}}
 end 
-local game,state,bet,money={},"menu",0,10000
-display.set_font("10x20")
-local fontSize={10,20}
 
 function lilka.update(delta)
     local cState=controller.get_state()
