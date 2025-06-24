@@ -49,9 +49,8 @@ function lilka.update(delta)
             table.insert(game[1],randomCard())
             if calcPlayer(game[1])[1]>21 then
                 state="turnP2" end
-        elseif cState.b.just_pressed and money>=bet then money=money-bet bet=bet*2 table.insert(game[1],randomCard()) state="turnP2"
+        elseif cState.b.just_pressed and money>=bet and #game[1]==2 then money=money-bet bet=bet*2 table.insert(game[1],randomCard()) state="turnP2"
         elseif cState.d.just_pressed then state="turnP2" end
-        --util.sleep(2)
     elseif state=="turnP2" then
         if calcPlayer(game[2])[1]<18 then table.insert(game[2],randomCard())
         else
