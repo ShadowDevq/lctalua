@@ -10,12 +10,13 @@ function randomCard()
        if game[2][i]==r then return randomCard() end
 end end
 function calcPlayer(player)
-    local l,v=0,0
+    local l,v,a=0,0,0
     for i=1,#player do
-        if player[i][1]==-1 then
-            if v+10>21 then l=l+1 v=v+1
-            else l=l+1 v=v+10 end
+        if player[i][1]==-1 then a=a+1
         else l=l+player[i][1] v=v+player[i][1] end
+    end for i=1,a do
+        l=l+1 v=v+1
+        if v+9<=21 then v=v+9 end
     end return {l,v}
 end
 
