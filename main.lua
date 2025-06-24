@@ -1,4 +1,4 @@
-local game,state,bet,money={},"menu",0,10000
+local game,state,bet,money={{},{}},"menu",0,10000
 display.set_font("10x20")
 local fontSize={10,20}
 local cValue,cType={1,2,3,4,5,6,7,8,9,10,10,10,10,-1},{"C","H","S","D"}
@@ -9,8 +9,18 @@ function randomCard()
    end for i=1,#game[2] do
        if game[2][i]==r then return randomCard() end
 end end
+function calcPlayer(player)
+    local l,v=0,0
+    for i=1,#player do
+        if player[i][1]==-1 then
+            if v+10>21 then l=l+1 v=v+1
+            else l=l+1 v=v+10 end
+        else l=l+player[i][1] v=v+player[i][1] end
+    end return {l,v}
+end
 
 function gameStart()
+  game={{},{}}
   return {{randomCard(),randomCard()},{randomCard(),randomCard()}}
 end 
 
@@ -31,7 +41,7 @@ function lilka.update(delta)
         elseif cState.a.just_pressed then money=money+bet bet=0
         elseif cState.start.just_released then state="turnP1" end
     elseif state=="turnP1" then
-
+        
     elseif state=="turnP2" then
 
 end end
