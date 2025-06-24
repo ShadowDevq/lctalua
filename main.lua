@@ -13,13 +13,13 @@ function calcPlayer(player)
     local l,v,a=0,0,0
     for i=1,#player do
         if player[i][1]==-1 then a=a+1
-        else l=l+player[i][1] v=v+player[i][1] end
-    end for i=1,a do
+        else l=l+player[i][1] v=v+player[i][1]    
+    end end for i=1,a do
         l=l+1 v=v+1
         if v+9<=21 then v=v+9 end
-    end 
-    if v==l then local s=tostring(v)
-    else local s=tostring(l).."/"..tostring(v) end
+    end
+    local s=tostring(v)
+    if l~=v then s=tostring(l).."/"..tostring(v) end
     return {v,s}
 end
 
@@ -68,7 +68,6 @@ function lilka.update(delta)
 end end
 
 function renderCentered(text,x,y)
-    if text==nil then return end
     display.set_cursor(x-math.floor(fontSize[1]*#text/2),y)
     display.print(text)
 end
