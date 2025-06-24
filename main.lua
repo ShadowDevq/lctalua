@@ -68,6 +68,7 @@ function lilka.update(delta)
 end end
 
 function renderCentered(text,x,y)
+    if text==nil then return end
     display.set_cursor(x-math.floor(fontSize[1]*#text/2),y)
     display.print(text)
 end
