@@ -64,6 +64,6 @@ function lilka.draw()
         renderCentered("Money: "..tostring(money),display.width/2,display.height/2-fontSize[2]*2)
         renderCentered("Bet: "..tostring(bet),display.width/2,display.height/2+fontSize[2]*2)
     elseif state=="turnP1" or state=="turnP2" then
-        renderCentered(tostring(calcPlayer(game[1]),display.width/2,display.height/2+fontSize[2]/2)
+        renderCentered(tostring(calcPlayer(game[1])),display.width/2,display.height/2+fontSize[2]/2)
     end
 end
