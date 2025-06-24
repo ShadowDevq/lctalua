@@ -8,7 +8,7 @@ function randomCard()
        if game[1][i]==r then return randomCard() end
    end for i=1,#game[2] do
        if game[2][i]==r then return randomCard() end
-end end
+end return r end
 function calcPlayer(player)
     local l,v,a=0,0,0
     for i=1,#player do
@@ -45,7 +45,7 @@ function lilka.update(delta)
         if cState.a.just_pressed then table.insert(game[1],randomCard())
         elseif cState.b.just_pressed and money>=bet then money=money-bet bet=bet*2 table.insert(game[1],randomCard()) state="turnP2"
         elseif cState.c.just_pressed then state="turnP2" end
-        util.sleep(2)
+        --util.sleep(2)
     elseif state=="turnP2" then
         if calcPlayer(game[2])[1]>17 then table.insert(game[2],randomCard())
         else util.sleep(3) game=gameStart() bet=0 state="pickBet" end
