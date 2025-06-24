@@ -17,7 +17,7 @@ function calcPlayer(player)
     end for i=1,a do
         l=l+1 v=v+1
         if v+9<=21 then v=v+9 end
-    end return {l,v}
+    end return {v,tostring(l).."/"..tostring(v)}
 end
 
 function gameStart()
@@ -42,7 +42,10 @@ function lilka.update(delta)
         elseif cState.a.just_pressed then money=money+bet bet=0
         elseif cState.start.just_released then state="turnP1" end
     elseif state=="turnP1" then
-        
+        if cState.a.just_pressed then table.insert(game[1],randomCard())
+        elseif cState.b.just_pressed and money>=bet then money=money-bet bet=bet*2 table.insert(game[1],randomCard()) state="turnP2"
+        elseif cState.c.just_pressed then state="turnP2" end
+        sleep(10)
     elseif state=="turnP2" then
 
 end end
@@ -61,6 +64,6 @@ function lilka.draw()
         renderCentered("Money: "..tostring(money),display.width/2,display.height/2-fontSize[2]*2)
         renderCentered("Bet: "..tostring(bet),display.width/2,display.height/2+fontSize[2]*2)
     elseif state=="turnP1" or state=="turnP2" then
-        
+        renderCentered(tostring(calcPlayer(game[1]),display.width/2,display.height/2+fontSize[2]/2)
     end
 end
