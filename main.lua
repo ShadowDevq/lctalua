@@ -20,25 +20,31 @@ function lilka.update(delta)
           state="pickBet"
         end
     elseif state=="pickBet" then
-        if cState.a.just_released and money>=5 then bet=bet+5 money=money-5
-        elseif cState.b.just_released and money>=10 then bet=bet+10 money=money-10
-        elseif cState.c.just_released and money>=50 then bet=bet+50 money=money-50
-        elseif cState.d.just_released and money>=100 then bet=bet+100 money=money-100 end
+        if cState.down.just_pressed and money>=5 then bet=bet+5 money=money-5
+        elseif cState.back.just_pressed and money>=10 then bet=bet+10 money=money-10
+        elseif cState.right.just_pressed and money>=50 then bet=bet+50 money=money-50
+        elseif cState.up.just_pressed and money>=100 then bet=bet+100 money=money-100
+        elseif cState.a.just_pressed then money=money+bet bet=0
+        elseif cState.start.just_released then state="turnP1" end
     elseif state=="turnP1" then
 
     elseif state=="turnP2" then
 
 end end
 
+function renderCentered(text,x,y)
+    display.set_cursor(x-math.floor(fontSize[1]*#text/2),y)
+    display.print(text)
+end
+
 function lilka.draw()
     display.fill_screen(display.color565(0,125,20))
     if state=="menu" then
-        display.set_cursor(display.width/2-math.floor(fontSize[1]*4.5), display.height/2-fontSize[2]*2)
-        display.print("BLACKJACK")
-        display.set_cursor(display.width/2-math.floor(fontSize[1]*5.5), display.height/2+fontSize[2]*2)
-        display.print("Press START")
+        renderCentered("BLACKJACK",display.width/2,display.height-fontSize[2]*2)
+        renderCentered("Press START",display.width/2, display.height/2+fontSize[2]*2)
     elseif state=="pickBet" then
-        
+        renderCentered("Money: "..to string(money),display.width/2,display.height/2-fontSize[2]*2)
+        renderCentered("Bet: "..to string(bet),display.width/2,display.height/2+fontSize[2]*2)
     elseif state=="turnP1" or state=="turnP2" then
         
     end
