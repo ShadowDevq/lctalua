@@ -17,7 +17,10 @@ function calcPlayer(player)
     end for i=1,a do
         l=l+1 v=v+1
         if v+9<=21 then v=v+9 end
-    end return {v,tostring(l).."/"..tostring(v)}
+    end 
+    if v==l then local s=tostring(v)
+    else local s=tostring(l).."/"..tostring(v) end
+    return {v,s}
 end
 
 function gameStart()
@@ -42,13 +45,25 @@ function lilka.update(delta)
         elseif cState.a.just_pressed then money=money+bet bet=0
         elseif cState.start.just_released then state="turnP1" end
     elseif state=="turnP1" then
-        if cState.a.just_pressed then table.insert(game[1],randomCard())
+        if cState.a.just_pressed then 
+            table.insert(game[1],randomCard())
+            if calcPlayer(game[1])[1]>21 then
+                state="turnP2" end
         elseif cState.b.just_pressed and money>=bet then money=money-bet bet=bet*2 table.insert(game[1],randomCard()) state="turnP2"
-        elseif cState.c.just_pressed then state="turnP2" end
+        elseif cState.d.just_pressed then state="turnP2" end
         --util.sleep(2)
     elseif state=="turnP2" then
-        if calcPlayer(game[2])[1]>17 then table.insert(game[2],randomCard())
-        else util.sleep(3) game=gameStart() bet=0 state="pickBet" end
+        if calcPlayer(game[2])[1]<18 then table.insert(game[2],randomCard())
+        else
+            if calcPlayer(game[1])[1]<=21 and
+               (calcPlayer(game[2])[1]>21 or 
+               calcPlayer(game[1])[1]>
+               calcPlayer(game[2])[1]) then
+                money=money+bet*2 end
+            util.sleep(3)
+            gameStart() 
+            bet=0 
+            state="pickBet" end
         util.sleep(2)
 end end
 
